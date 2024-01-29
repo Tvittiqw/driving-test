@@ -1,0 +1,35 @@
+.customButton {
+    width: 200px;
+    height: 48px;
+    border-radius: 12px;
+    border: none;
+}
+
+.buttonTitle {
+    font-size: 16px;
+}
+
+.applyButton {
+    background-color: var(--orange);
+}
+
+.applyButton:hover {
+    background-color: var(--orange-hover);
+}
+
+.correct {
+    background-color: var(--green);
+    width: 232px;
+}
+.correct:hover {
+    background-color: var(--green-hover);
+}
+
+.error { 
+    background-color: var(--red);
+    color: white;
+    width: 232px;
+}
+.error:hover { 
+    background-color: var(--red-hover);
+}

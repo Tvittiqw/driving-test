@@ -5,9 +5,22 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  --orange-hover: #FFC838;
+  --orange: #F1B51A;
+  --green: #61B43A; 
+  --green-hover: #81DF55; 
+  --red: #CC0F1B; 
+  --red-hover: #F52835; 
+  --gray: #AEB2A7; 
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+@font-face {
+  font-family: 'Inter-SemiBold';
+  src: local('Inter-SemiBold')
+  url('assets/fonts/Inter/static/Inter-SemiBold.ttf') format('truetype');
 }

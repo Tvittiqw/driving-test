@@ -1,0 +1,46 @@
+ .expand-button {
+    width: 48px;
+    height: 48px;
+    border: 1px solid #000;
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+    transition: width 0.3s, left 0.3s;
+    background-color: #FFFFFF;
+  }
+  
+  .expand-button:hover {
+    width: 123px;
+    border-color:  var(--orange);
+  }
+
+  .expand-button:hover .icon {
+    fill: var(--orange);
+  }
+  
+  .icon {
+    position: absolute;
+    right: 0;
+    top: 25%;
+    width: 24px;
+    height: 24px;
+    margin-right: 12px;
+    align-items: center;
+  }
+  
+  .text {
+    position: absolute;
+    top: 50%;
+    left: 35%;
+    transform: translate(-50%, -50%);
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.3s;
+    color: #000;
+    font-size: 16px;
+  }
+  
+  .expand-button:hover .text {
+    opacity: 1;
+  }
+  

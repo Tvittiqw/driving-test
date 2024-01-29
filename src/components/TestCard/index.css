@@ -1,0 +1,143 @@
+.scene {
+    width: 650px;
+    height: 520px;
+    perspective: 600px;
+  }
+  
+  .card {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transform-origin: center right;
+    transition: transform 1s;
+  }
+  
+  .card.is-flipped {
+    transform: translateX(-100%) rotateY(-180deg);
+  }
+  
+  .card__face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 30px;
+    backface-visibility: hidden;
+  }
+  
+  .card__face--front {
+    background: #FFFFFF;
+  }
+  
+  .card__face--back {
+    background: #FFFFFF;
+    transform: rotateY(180deg);
+  }
+
+  .testCard{
+    display: flex;
+    flex-direction: column;
+    padding: 24px 40px;
+    align-items: center;
+  }
+
+  .checkCard{
+    display: flex;
+    flex-direction: column;
+    padding: 24px 40px;
+    align-items: center;
+    border-radius: 30px;
+    background-color: #FFFFFF;
+    width: 570px;
+  }
+
+  .testCardHead{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 40px;
+  }
+  
+  .titleWrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+
+  .checkButtonsWrapper {
+    width: 488px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .signType{
+    margin-bottom: 24px!important;
+  }
+
+  .description {
+    margin-bottom: 40px!important;
+  }
+
+  .hintLable{
+    margin-bottom: 8px;
+  }
+
+
+  .roadSign{
+    width: 177px;
+    height: 177px;
+    margin-bottom: 24px;
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 488px;
+    margin-bottom: 40px;
+    text-align: center;
+  }
+
+  .answerInput{
+    background-color: #FFFFFF;
+    border: 1px solid #AEB2A7;
+    border-radius: 10px;
+    padding: 14.5px 16px;
+    width: 100%;
+    font-size: 16px;
+  }
+
+  .answerInput::placeholder {
+    font-size: 16px;
+    color: #AEB2A7;
+  }
+
+  .inputWrapper {
+    width: 100%;
+  }
+
+  .answerTitle{
+    margin-right: 8px!important;
+  }
+
+  .answerWrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+  }
+
+  .questionForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+
+
+
+
+ 
