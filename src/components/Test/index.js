@@ -9,129 +9,119 @@ export default function Test() {
     const [currentStep, setCurrentStep] = useState('test')
     const [usersAnswer, setUsersAnswer] = useState('')
     const [basicSigns, setBasicSigs] = useState([])
-    const [passedSigns, setPassedSigns] = useState([])
-    const [mistakesArr, setMistakes] = useState([])
+    const [currentSignIndex, setCurrentSignIndex] = useState(0)
     const totalQuestions = ROAD_SIGNS.length;
 
     useEffect(()=>{
-        resetState();
+        initState();
     }, [])
 
-    const resetState = () => {
+    const initState = () => {
         const shuffledArray = shuffle(ROAD_SIGNS)
         setBasicSigs(shuffledArray)
-        setPassedSigns([])
-        setMistakes([])
     }
-    
-    const handleInputChnage = (e) => {
+
+    const handleInputChange = (e) => {
         setUsersAnswer(e.target.value)
     }
 
     const submitSign = (isHint) => {
-        const currentSign = basicSigns[0]
-        const mainArray = basicSigns;
-        const updatedCurrentSign = {
-            ...currentSign,
-            usersAnswer: isHint ? 'used hint' : usersAnswer,
-            usedHint: isHint
-        }
+        const updatedBasicSigns = basicSigns.map((sign, index) => {
+            if(index === currentSignIndex) {
+                const updatedCurrentSign = {
+                    ...sign,
+                    usersAnswer: isHint ? 'used hint' : usersAnswer,
+                    usedHint: isHint,
+                }
+
+                if(isHint) {
+                    updatedCurrentSign.isCorrect = false;
+                }
+
+                return updatedCurrentSign
+            } else {
+                return sign
+            }
+        })
 
         if(isHint){
-            updatedCurrentSign.isCorrect = false
+            setCurrentSignIndex(currentSignIndex + 1)
+            setCurrentStep('test')
+            return
         }
 
-        mainArray.splice(0, 1)
-        setPassedSigns([...passedSigns, updatedCurrentSign])
-        setBasicSigs(mainArray)
         setUsersAnswer('')
-        if(isHint){
-            return setCurrentStep('test')
-        }
+        setBasicSigs(updatedBasicSigns)
         setCurrentStep('check')
     }
 
     const backToStart = () => {
-        resetState()
+        initState()
         setCurrentStep('test')
     }
 
-    const switchToFinalStep = () => {
-        const filteredObjects = passedSigns.filter(sign => sign.isCorrect === false);
-        
-        setMistakes(filteredObjects)
-        setCurrentStep('conclusion')
-    }
-
     const handleNextSign = (type) => {
-        console.log('handleNextSign')
-        const newPassedSigns = [...passedSigns]
+        setBasicSigs(prevBasicSigns => {
+            return prevBasicSigns.map((sign, index) => {
+                return index === currentSignIndex
+                    ? {...sign, isCorrect: type === 'correct'}
+                    : sign;
+            });
+        });
 
-        if(type === 'correct') {
-            newPassedSigns[newPassedSigns.length - 1].isCorrect = true;
-            setPassedSigns(newPassedSigns)
-            setCurrentStep('test')
-        }
-
-        if(type === 'error') {
-            newPassedSigns[newPassedSigns.length - 1].isCorrect = false;
-            setPassedSigns(newPassedSigns)
-            setCurrentStep('test')
-        }
-
-        if(!basicSigns.length){
-            switchToFinalStep()
-        }
+        setCurrentSignIndex(currentSignIndex + 1);
+        setCurrentStep(currentSignIndex + 1 === basicSigns.length ? 'conclusion' : 'test');
     }
-    
+
     const renderTest = () => {
+        const commonProps = {
+            handleInputChange: handleInputChange,
+            submitSign: submitSign,
+            total: totalQuestions,
+            currentQuestion: totalQuestions - basicSigns.length
+        };
+
         switch(currentStep) {
             case 'check':
-                const signToCheck = passedSigns[passedSigns.length - 1]
-        
+                const signToCheck = basicSigns[currentSignIndex]
+
                 return (
                     <TestCard
+                        {...commonProps}
                         icon={signToCheck.icon}
-                        handleInputChnage={handleInputChnage}
-                        submitSign={submitSign}
                         label={signToCheck.label}
                         type={signToCheck.type}
                         description={signToCheck.description}
-                        total={totalQuestions}
                         usersAnswer={signToCheck.usersAnswer}
                         usedHint={signToCheck.usedHint}
                         handleNextSign={handleNextSign}
-                        currentQuestion={totalQuestions - basicSigns.length}
                         isCheck={true}
                     />
                 )
             case 'conclusion':
+                const mistakesArr = basicSigns.filter(item => !item.isCorrect)
                 const mistakesAmount = mistakesArr.length;
-                const totalSigns = passedSigns.length;
-        
+
                 return (
                     <Conclusion
                         mistakesAmount={mistakesAmount}
-                        totalSigns={totalSigns}
+                        totalSigns={totalQuestions}
                         mistakesArr={mistakesArr}
                         backToStart={backToStart}
                      />
                 )
             default:
-                const currentSign = basicSigns[0]
+                const currentSign = basicSigns[currentSignIndex]
 
-                if(!currentSign) return
+                if(!currentSign) return null
 
                 return (
                     <TestCard
+                        {...commonProps}
                         icon={currentSign.icon}
-                        handleInputChnage={handleInputChnage}
-                        submitSign={submitSign}
                         label={currentSign.label}
                         type={currentSign.type}
                         description={currentSign.description}
-                        total={totalQuestions}
-                        currentQuestion={totalQuestions - basicSigns.length}
                     />
                 )
           }

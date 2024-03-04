@@ -4,20 +4,19 @@ import CustomButton from '../CustomButton';
 import ExpandButton from '../ExpandableButton';
 import ProgressBar from '../ProgressBar';
 
-  
+
 const TestCard = ({
-    icon, 
-    usersAnswer, 
-    handleInputChnage, 
-    submitSign, 
-    label, 
-    type, 
-    description, 
-    currentQuestion, 
+    icon,
+    usersAnswer,
+    handleInputChange,
+    submitSign,
+    label,
+    type,
+    description,
+    currentQuestion,
     total,
     isCheck,
     handleNextSign,
-    usedHint
 }) => {
     const [isFlipped, setIsFlipped] = useState(false);
     const progressPercent = (currentQuestion / total) * 100;
@@ -37,9 +36,9 @@ const TestCard = ({
 
                         {!isCheck && !isHint && <ExpandButton title={'Get a hint'} handleClick={handleFlip}/>}
                     </div>
-                    <ProgressBar 
-                        progressPercent={progressPercent} 
-                        totalQuestions={total} 
+                    <ProgressBar
+                        progressPercent={progressPercent}
+                        totalQuestions={total}
                         currentQuestion={currentQuestion}
                     />
                 </div>
@@ -63,16 +62,16 @@ const TestCard = ({
                             {isHint ? <>
                                     <h2 className='hintLable'>{label}</h2>
                                     <p className='greyText'>{type}</p>
-                                </> : <input 
-                                    placeholder='Type sign name' 
-                                    className='answerInput' 
-                                    type="text" 
-                                    name="name" 
-                                    onChange={(e)=>{handleInputChnage(e)}}
+                                </> : <input
+                                    placeholder='Type sign name'
+                                    className='answerInput'
+                                    type="text"
+                                    name="name"
+                                    onChange={(e)=>{handleInputChange(e)}}
                                 />
-                            }  
+                            }
                     </div>
-                    <CustomButton byttonType={'submit'} title={'Apply'} 
+                    <CustomButton byttonType={'submit'} title={'Apply'}
                     // handleClick={()=>{
                     //     if(isHint) {
                     //         setIsFlipped(false)
@@ -98,18 +97,18 @@ const TestCard = ({
                         <p className='answerTitle greyText'>Your answer:</p>
                         <h2>{usersAnswer}</h2>
                     </div>
-                    
+
                 </div>
                 <div className='checkButtonsWrapper'>
                     <CustomButton type={'correct'}  title={'Correct'} handleClick={()=>handleNextSign('correct')}/>
                     <CustomButton  type={'error'} title={'Incorrect'} handleClick={()=>handleNextSign('error')}/>
-                </div>               
+                </div>
             </div>
         )
     }
     return (
-        isCheck 
-            ? renderCheck() 
+        isCheck
+            ? renderCheck()
             : <div className="scene scene--card">
                     <div className={`card ${isFlipped ? 'is-flipped' : ''}`}>
                         <div className="card__face card__face--front">

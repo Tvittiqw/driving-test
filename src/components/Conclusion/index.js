@@ -11,13 +11,14 @@ const Conclusion = ({mistakesAmount, totalSigns, mistakesArr}) => {
     function goHome() {
         navigate(`/`);
     }
+    const correctAmount = totalSigns - mistakesAmount;
     
 
     return (
         <>
             <div className='conclusionHead'>
                 <h2>Well done!</h2>
-                <p>Your score is {mistakesAmount} out of {totalSigns}</p>
+                <p>Your score is {correctAmount} out of {totalSigns}</p>
 
                 <CustomButton  
                     title={ 'Exit'} 

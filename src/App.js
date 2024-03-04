@@ -1,16 +1,16 @@
 import React from 'react';
 import './App.css';
-import TestCard from './components/NavCard';
-import testsList from './constants/mainPage';
+import NavCard from './components/NavCard';
+import navigationList from './constants/mainPage';
 
 function App() {
 
-  const renderTestsList = () => {
+  const renderNavigationList = () => {
     return (
-      testsList.map((item, index)=>{
+      navigationList.map(item=>{
         return (
-          <TestCard 
-            key={index}
+          <NavCard 
+            key={item.title}
             card={item}
           />
         )
@@ -20,7 +20,7 @@ function App() {
 
   return (
       <div className='testsContaiter'>
-        {renderTestsList()}
+        {renderNavigationList()}
       </div>
   );
 }
