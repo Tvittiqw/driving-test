@@ -1,0 +1,23 @@
+.answerInput{
+    border: none;
+    border-radius: 10px;
+    width: 100%;
+    font-size: 16px;
+    padding: 14.5px 16px;
+  }
+
+  .answerInput::placeholder {
+    font-size: 16px;
+    color: #AEB2A7;
+  }
+
+  .inputWrapper {
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+    background-color: #FFFFFF;
+    border: 1px solid #AEB2A7;
+    border-radius: 10px;
+  }
+
+  

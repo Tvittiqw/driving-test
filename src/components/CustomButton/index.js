@@ -1,7 +1,7 @@
 import React from 'react';
 import './index.css'
 
-const CustomButton = ({ title, handleClick, type, byttonType }) => {
+const CustomButton = ({ title, handleClick, type, byttonType, onKeyPressed}) => {
 
     const getClassName = (type) => {
         if(type === 'error'){

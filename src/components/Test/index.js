@@ -1,28 +1,36 @@
-import { useState, useEffect } from "react";
-import ROAD_SIGNS from "../../constants/roadSigns/roadSigns";
+import { useState, useEffect, useCallback } from "react";
+import signs from "../../constants/roadSigns/roadSigns";
 import './index.css'
 import shuffle from "../../helpers/shuffleArray";
 import TestCard from "../TestCard";
 import Conclusion from "../Conclusion";
+import { useParams } from "react-router-dom";
 
 export default function Test() {
+    const { testName } = useParams()
     const [currentStep, setCurrentStep] = useState('test')
     const [usersAnswer, setUsersAnswer] = useState('')
     const [basicSigns, setBasicSigs] = useState([])
     const [currentSignIndex, setCurrentSignIndex] = useState(0)
-    const totalQuestions = ROAD_SIGNS.length;
+    console.log('basicSigns',basicSigns)
+    console.log('currentSignIndex',currentSignIndex)
+    const totalQuestions = signs[testName].length;
+    
+    const initState = useCallback(() => {
+        const shuffledArray = shuffle(signs[testName])
+        setBasicSigs(shuffledArray)
+    }, [testName])
 
     useEffect(()=>{
         initState();
-    }, [])
-
-    const initState = () => {
-        const shuffledArray = shuffle(ROAD_SIGNS)
-        setBasicSigs(shuffledArray)
-    }
+    }, [testName, initState])
 
     const handleInputChange = (e) => {
         setUsersAnswer(e.target.value)
+    }
+
+    const handleVoiceRecognition = (text) => {
+        setUsersAnswer(text)
     }
 
     const submitSign = (isHint) => {
@@ -76,9 +84,11 @@ export default function Test() {
     const renderTest = () => {
         const commonProps = {
             handleInputChange: handleInputChange,
+            handleVoiceRecognition: handleVoiceRecognition,
             submitSign: submitSign,
             total: totalQuestions,
-            currentQuestion: totalQuestions - basicSigns.length
+            currentQuestion: currentSignIndex,
+            inputValue: usersAnswer
         };
 
         switch(currentStep) {

@@ -30,6 +30,8 @@ import PRIORITY_SIGNS from './prioritySigns'
 import WARNING_SIGNS from './warningSigns'
 import PROHIBITORY_SIGNS from './prohibittorySigns'
 import MANDATORY_SIGNS from './mandatorySigns'
+import ROAD_MARKINGS from './roadMarkings'
+import ROAD_GESTURES from './roadGestures'
 
 
 
@@ -209,5 +211,17 @@ const ROAD_SIGNS = [
     ...SPEED_LIMIT_SIGNS
 ];
 
+const FULL_TEST = [
+    ...ROAD_SIGNS,
+    ...ROAD_MARKINGS,
+    ...ROAD_GESTURES
+]
 
-export default ROAD_SIGNS;
+const tests =  {
+    signs: ROAD_SIGNS,
+    markings: ROAD_MARKINGS,
+    gestures: ROAD_GESTURES,
+    full: FULL_TEST
+}
+
+export default tests;

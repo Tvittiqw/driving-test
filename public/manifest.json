@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Driving test",
+  "name": "Check how good you know road signs",
   "icons": [
     {
       "src": "favicon.ico",
